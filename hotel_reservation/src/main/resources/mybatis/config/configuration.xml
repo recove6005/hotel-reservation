@@ -10,7 +10,8 @@
         <setting name="defaultStatementTimeout" value="25"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+
     <typeAliases>
-        <typeAlias alias="UserDTO" type="com.example.security.dto.UserDTO" />
+        <typeAlias alias="UserVO" type="com.example.hotelreservation.domains.vo.UserVO" />
     </typeAliases>
 </configuration>
