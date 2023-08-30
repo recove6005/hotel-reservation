@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class RoomVO {
     private int no;
-    private String id;
+    private String userId;
     private String title;
     private int price;
     private String text;

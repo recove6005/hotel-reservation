@@ -11,4 +11,3 @@
         INSERT INTO `user` VALUES (#{id}, #{pw}, #{nickname}, #{tel}, #{email}, #{birth}, #{role});
     </insert>
 </mapper>
-

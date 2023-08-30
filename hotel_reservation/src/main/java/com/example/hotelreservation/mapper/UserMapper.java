@@ -7,5 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     // 로그인 시 유저 조회
     UserVO get_user(String id);
+    // 회원가입
     void join_user(UserVO vo);
 }

@@ -14,8 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardVO {
     private int no;
-    private String id;
+    private String userId;
     private String title;
+    private int price;
     private String text;
     private List<MultipartFile> images;
 }

@@ -12,6 +12,20 @@
     </settings>
 
     <typeAliases>
+        <!--유저 관련-->
         <typeAlias alias="UserVO" type="com.example.hotelreservation.domains.vo.UserVO" />
+
+        <!--게시판 관련-->
+        <typeAlias alias="BoardVO" type="com.example.hotelreservation.domains.vo.BoardVO"/>
+
+<!--        평점 관련-->
+        <typeAlias alias="RatingVO" type="com.example.hotelreservation.domains.vo.RatingVO"/>
+
+<!--        방 관련-->
+        <typeAlias alias="RoomImagesVO" type="com.example.hotelreservation.domains.vo.RoomImagesVO"/>
+        <typeAlias alias="RoomVO" type="com.example.hotelreservation.domains.vo.RoomVO"/>
+        <typeAlias alias="RoomDTO" type="com.example.hotelreservation.domains.dto.RoomDTO"/>
+
+
     </typeAliases>
 </configuration>

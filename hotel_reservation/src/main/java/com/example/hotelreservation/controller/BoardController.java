@@ -1,11 +1,9 @@
 package com.example.hotelreservation.controller;
 
-import com.example.hotelreservation.domains.dto.RoomDTO;
 import com.example.hotelreservation.domains.security.SecurityUser;
 import com.example.hotelreservation.domains.vo.BoardVO;
 import com.example.hotelreservation.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +23,17 @@ public class BoardController {
     }
 
     @PostMapping
-    public void post_board(
+    public String post_board(
             @AuthenticationPrincipal SecurityUser user,
             BoardVO boardVO
     ) {
-        boardService.post_board(user, boardVO);
-
+        // 게시물 작성 시도
+        if(boardService.post_board(user, boardVO)){
+            // 성공시 => 메인화면으로
+            return "redirect:/";
+        }else{
+            // 실패시 => 게시판으로 다시..
+            return "redirect:/board?error";
+        }
     }
-
-
-
 }
