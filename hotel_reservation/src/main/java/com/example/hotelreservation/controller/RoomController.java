@@ -2,7 +2,7 @@ package com.example.hotelreservation.controller;
 
 
 import com.example.hotelreservation.domains.dto.RoomDTO;
-import com.example.hotelreservation.service.security.RoomService;
+import com.example.hotelreservation.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;

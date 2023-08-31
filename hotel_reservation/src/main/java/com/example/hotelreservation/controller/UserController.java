@@ -1,20 +1,23 @@
 package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.domains.vo.UserVO;
+import com.example.hotelreservation.service.SMSService;
 import com.example.hotelreservation.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
 @Log4j2
 public class UserController {
+    @Autowired
+    private SMSService smsService;
+
     @Autowired
     private UserService userService;
 
@@ -65,6 +68,13 @@ public class UserController {
 
     @GetMapping("/mypage/heart")
     public void get_mypage_heart() {
+
+    }
+
+    @GetMapping("/sms")
+    @ResponseBody
+    public HttpStatus sms_test(@RequestParam String telNum) {
+        return smsService.send_sms("telNum");
 
     }
 }

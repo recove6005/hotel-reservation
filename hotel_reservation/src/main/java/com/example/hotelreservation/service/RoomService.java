@@ -1,4 +1,4 @@
-package com.example.hotelreservation.service.security;
+package com.example.hotelreservation.service;
 
 import com.example.hotelreservation.domains.dto.RoomDTO;
 import com.example.hotelreservation.mapper.RoomMapper;
