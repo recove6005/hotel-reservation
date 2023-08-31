@@ -8,5 +8,5 @@ fetch('/user/sms?telNum=${telNum}')
 .catch();
 
 function check_verify_code() {
-    
+    console.log("1");
 }
