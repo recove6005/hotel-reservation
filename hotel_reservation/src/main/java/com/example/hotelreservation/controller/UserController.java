@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
 @Log4j2
@@ -71,10 +73,52 @@ public class UserController {
 
     }
 
-    @GetMapping("/sms")
-    @ResponseBody
-    public HttpStatus sms_test(@RequestParam String telNum) {
-        return smsService.send_sms("telNum");
 
+    // 인증번호 요청 시 인증번호 생성
+    @GetMapping("/sms/key")
+    @ResponseBody
+    public boolean sms_test(HttpSession session, @RequestParam String telNum) {
+        // 이미 한 번 인증 요청을 해서 인증번호를 받은 적이 있다면
+        if(session.getAttribute("VERIFY_KEY") != null) {
+            log.warn("이미 VERIFY_KEY가 존재하므로, 기존 코드를 삭제합니다");
+            session.removeAttribute("VERIFY_KEY");
+        }
+        // 새로 VERIFY_KEY를 발급 받음
+        String VERIFY_KEY = smsService.get_verify_key(telNum);
+        // 인증키 발급 실패
+        if(VERIFY_KEY == null) {
+            // 인증키 발급 실패
+            log.error("VERIFY_KEY가 생성되지 않았음 => SMS 요청 실패!");
+            return false;
+        } else {
+            // 발급에 성공했다면
+            log.info("VERIFY_KEY가 생성되었음 => " + VERIFY_KEY);
+            session.setAttribute("VERIFY_KEY", VERIFY_KEY);
+            return true;
+        }
+    }
+
+    // 사용자가 인증번호를 작성하고 인증 시도
+    @ResponseBody
+    @GetMapping("/sms/verify")
+    public boolean get_verify(HttpSession session, @RequestParam("key") String userKey) {
+        Object object = session.getAttribute("VERIFY_KEY");
+        // 인증번호를 발급받지 않고 session에서 인증번호를 가져오려 할 시 ERROR
+        if(object == null) {
+            log.error("생성되어있는 VERIFY_KEY가 존재하지 않음!");
+            return false; //인증 실패!
+        }
+
+        String VERIFY_KEY = (String) object;
+        log.info("생성되어있는 VERIFY_KEY => " + VERIFY_KEY);
+        // 사용자가 입력한 값과, 기존 코드가 동일하다면
+        if(VERIFY_KEY.equals(userKey)) {
+            log.info("VERIFY_KEY가 일치함! 인증 성공!");
+            session.setAttribute("verified", true);
+            session.removeAttribute("VERIFY_KEY");
+            return true;
+        }
+        // 사용자가 입력한 값이 옳지 않음
+        return false;
     }
 }

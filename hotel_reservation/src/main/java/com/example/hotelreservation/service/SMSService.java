@@ -43,6 +43,14 @@ public class SMSService {
     private String TIME_STAMP;
     private String FQN;
 
+    // SMS를 보내고, 결과 상태에 따라 인증번호를 반환
+    public String get_verify_key(String TO_NUMBER) {
+        // 인증번호 생성
+        String VERIFY_KEY = create_key();
+        return VERIFY_KEY;
+    }
+
+
     // 요청 보낼 때 사용하는 NAVER CLOUD SERVICE의 시그니쳐 생성 코드
     public String makeSignature(String method, String url) throws Exception {
         String space = " ";					// one space
@@ -77,7 +85,8 @@ public class SMSService {
     public HttpStatus send_sms(String TO_NUMBER) {
         // 인증번호가 부탁된 메세지 생성
         MESSAGE += " [" + create_key() + "]";
-
+        // 0. 현재 타임 스탬프 값 생성
+        TIME_STAMP = String.valueOf(Timestamp.valueOf(LocalDateTime.now()).getTime());
         // 1. RestTemplate 객체 생성 : RestTemplate 클래스 사용
         log.info("CREATE REST_TEAMPLATE");
         RestTemplate restTemplate = new RestTemplate();
