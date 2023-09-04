@@ -11,24 +11,24 @@
 <div class="detail-info-container">
     <div class="info-top">
         <div class="title">room info title</div>
-        <div class="host-info"><a href="#">host info(name)</a></div>
+        <div class="host-info"><a href="#">host info([[${/RoomDTO.roomVO.userId}}]])</a></div>
         <div class="rate-info"><a href=""><img src="../../static/image/icons8-star-48.png" alt="" th:src="@{/image/icons8-star-48.png}"><span>3.5</span></a></div>
         <div class="save-info"><a href=""><img src="../../static/image/icons8-heart-50.png" alt="" th:src="@{/image/icons8-heart-50.png}"><span>저장</span></a></div>
     </div>
     <div class="info-main">
         <div class="details">
-            <div class="photo-box">
-                <img src="../../static/image/room-sample.jpg" alt="" th:src="@{/image/room-sample.jpg}">
+            <div class="photo-box" th:each="roomImageVO: ${roomDTO.roomImagesVO}">
+                <img th:src="|@{/rooms/image/${roomImageVO.roomImage}}|" alt="room-photo">
+<!--                <img src="../../static/image/room-sample.jpg" alt="" th:src="@{/image/room-sample.jpg}">-->
             </div>
             <div class="details-box">
-
             </div>
         </div>
 
         <form action="">
             <div class="pay-box">
                 <div>
-                    <span>&#8361;</span><span class="per-price-input">100,000</span><span>/박</span>
+                    <span>&#8361;</span><span class="per-price-input">[[${/RoomDTO.roomVO.price}}]]</span><span>/박</span>
                     <select name="" id="">
                         <option value="1">1명</option>
                         <option value="2">2명</option>
@@ -42,7 +42,7 @@
                     <label for="perday"><input class="per-day-input" id="perday" type="text"> 박</label>
                 </div>
                 <div>
-                    <span>&#8361;</span><span class="per-price-output">100,000</span><span>x</span><span class="per-day-output"> 5 </span><span>박</span>
+                    <span>&#8361;</span><span class="per-price-output" th:text="${RoomDTO.roomVO.userId} + 님">[[${/RoomDTO.roomVO.price}}]]</span><span>x</span><span class="per-day-output"> 5 </span><span>박</span>
                     <span>&#8361;</span><span class="total-price">100,000</span>
                 </div>
             </div>

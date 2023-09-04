@@ -21,6 +21,7 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+
     @GetMapping
     @ResponseBody
     public List<RoomDTO> get_all_rooms() {
@@ -33,4 +34,12 @@ public class RoomController {
     ) throws IOException {
         return roomService.get_room_image_file(imageName);
     }
+
+
+    // 방 세부 내용 페이지
+    @GetMapping("/{roomNo}")
+    public String get_rooms_main(@PathVariable("roomNo") int roomNo) {
+        return "/rooms/main";
+    }
+
 }

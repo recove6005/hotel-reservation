@@ -27,9 +27,9 @@
     </section>
 
     <section class="rooms">
-        <div class="room_item_container">
+        <form action="/rooms/main" method="get" class="room_item_container">
             <div class="room_item_photo">
-                <img src="../../static/image/rooms/room-sample.jpg" alt="" th:src="@{/image/rooms/room-sample.jpg}">
+                <a href=""><img src="../../static/image/rooms/room-sample.jpg" alt="" th:src="@{/image/rooms/room-sample.jpg}"></a>
             </div>
             <div class="room_item_header">
                 <div class="room_item_title">room title</div>
@@ -41,7 +41,7 @@
                 <span>100,000</span>
                 <span>/박</span>
             </div>
-        </div>
+        </form>
     </section>
 </main>
 

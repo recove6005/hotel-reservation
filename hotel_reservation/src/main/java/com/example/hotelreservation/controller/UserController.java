@@ -2,15 +2,16 @@ package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.domains.vo.UserVO;
 import com.example.hotelreservation.service.SMSService;
+import com.example.hotelreservation.service.UserMailService;
 import com.example.hotelreservation.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -19,9 +20,10 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private SMSService smsService;
-
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMailService userMailService;
 
     @GetMapping("/login")
     public void get_login() {
@@ -53,7 +55,7 @@ public class UserController {
         return "redirect:/"; // /home
     }
 
-    @GetMapping("/mypage")
+    @GetMapping("/mypage/info")
     public void get_mypage_info() {
 
     }
@@ -120,5 +122,26 @@ public class UserController {
         }
         // 사용자가 입력한 값이 옳지 않음
         return false;
+    }
+
+
+    // 아이디 비밀번호 찾기 페이지
+    @GetMapping("/info")
+    public void get_info() {
+
+    }
+
+    // 메일 발송하기
+    @GetMapping("/find")
+    @ResponseBody
+    public void send_mail(
+            @RequestParam String userEmail,
+            @RequestParam(defaultValue = "") String userId
+            ) {
+        try {
+            userMailService.find_id(userEmail);
+        } catch (MessagingException e) {
+            throw new RuntimeException();
+        }
     }
 }

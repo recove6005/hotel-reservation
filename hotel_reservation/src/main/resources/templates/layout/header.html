@@ -16,7 +16,9 @@
         </nav>
         <a sec:authorize='authenticated and hasRole("SELLER")' th:href="@{/board}"><img src="../../static/image/layout/header/icons8-board-50.png" alt="" th:src="@{/image/layout/header/icons8-board-50.png}"></a>
         <a class="global" href="#"><img src="../../static/image/layout/header/icons8-earth-50.png" alt="" th:src="@{/image/layout/header/icons8-earth-50.png}"></a>
-        <a class="user" href="/user/login"><img src="../../static/image/layout/header/icons8-user-50.png" alt="" th:src="@{/image/layout/header/icons8-user-50.png}"></a>
+        <a sec:authorize='not authenticated' class="user" href="/user/login"><img src="../../static/image/layout/header/icons8-user-50.png" alt="" th:src="@{/image/layout/header/icons8-user-50.png}"></a>
+        <a sec:authorize='authenticated' class="user" href="/user/mypage/info"><img src="../../static/image/layout/header/icons8-user-50.png" alt="" th:src="@{/image/layout/header/icons8-user-50.png}"></a>
+
     </header>
 </body>
 </html>

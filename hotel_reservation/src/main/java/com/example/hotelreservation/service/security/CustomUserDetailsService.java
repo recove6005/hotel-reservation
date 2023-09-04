@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info(" ======= loadUserByUsername: ["+ username + "]");
 
-            UserVO userVO = userMapper.get_user(username);
+            UserVO userVO = userMapper.get_user_by_id(username);
 
             // 유저 조회 실패
             if(userVO == null) {
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
             // 유저 조회 성공
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + userVO.getRole());
-//            SecurityUser securityUser = SecurityUser.builder().userVO(userVO).build();
+        // SecurityUser securityUser = SecurityUser.builder().userVO(userVO).build();
             SecurityUser securityUser = new SecurityUser(userVO, List.of(authority));
             return securityUser;
         }

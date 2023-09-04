@@ -21,7 +21,7 @@ public class RoomService {
     private RoomMapper roomMapper;
 
     public List<RoomDTO> get_all_rooms() {
-        return roomMapper.get_all_rooms();
+        return roomMapper.get_all_rooms(null);
     }
 
     public ResponseEntity<Resource> get_room_image_file(String fileName) throws IOException {
@@ -29,5 +29,9 @@ public class RoomService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Contenty-Type", Files.probeContentType(resource.getFile().toPath()));
         return  ResponseEntity.ok().headers(httpHeaders).body(resource);
+    }
+
+    public RoomDTO find_room_by_roonNo(int roomNo) {
+        return roomMapper.get_all_rooms(roomNo).get(0);
     }
 }

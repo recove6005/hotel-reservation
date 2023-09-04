@@ -12,6 +12,7 @@ function get_all_rooms() {
 function create_rooms(roomList) {
     roomsSection.innerHTML = '';
     for(const room of roomList) {
+        const roomNo = room.roomVO.no;
         const title = room.roomVO.title;
         const price = room.roomVO.price;
         const image = room.roomImagesVO[0].roomImage;
@@ -25,6 +26,7 @@ function create_rooms(roomList) {
                 <img src="/rooms/image/${image}" alt="room_photo">
             </div>
             <div class="room_item_header">
+                <input type="hidden" name="roomNo" value="${roomNo}">
                 <div class="room_item_title">${title}</div>
                 <a class="room_item_heart" href=""><img src="../../static/image/layout/header/icons8-heart-50.png" alt="" th:src="@{/image/layout/header/icons8-heart-50.png}"></a>
                 <a class="room_item_rating" href=""><img src="../../static/image/layout/header/icons8-star-48.png" alt="" th:src="@{/image/layout/header/icons8-star-48.png}"><span>${rate}</span></a>

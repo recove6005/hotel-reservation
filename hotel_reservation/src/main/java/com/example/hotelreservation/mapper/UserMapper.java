@@ -5,8 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    // 로그인 시 유저 조회
-    UserVO get_user(String id);
+    // 로그인 시 id로 유저 조회
+    UserVO get_user_by_id(String id);
+    // 아이디 찾기 시 email로 유저 조회
+    UserVO get_user_by_email(String email);
     // 회원가입
     void join_user(UserVO vo);
 }
