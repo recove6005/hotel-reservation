@@ -1,6 +1,7 @@
 package com.example.hotelreservation.service;
 
 import com.example.hotelreservation.domains.dto.RoomDTO;
+import com.example.hotelreservation.mapper.ReserveMapper;
 import com.example.hotelreservation.mapper.RoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -23,7 +24,6 @@ public class RoomService {
     public List<RoomDTO> get_all_rooms() {
         return roomMapper.get_all_rooms(null);
     }
-
     public ResponseEntity<Resource> get_room_image_file(String fileName) throws IOException {
         Resource resource = new FileSystemResource(IMAGE_FILE_PATH + fileName);
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -34,4 +34,7 @@ public class RoomService {
     public RoomDTO find_room_by_roonNo(int roomNo) {
         return roomMapper.get_all_rooms(roomNo).get(0);
     }
+
+
+
 }

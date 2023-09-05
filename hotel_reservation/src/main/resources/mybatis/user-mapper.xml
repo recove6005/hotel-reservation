@@ -13,4 +13,5 @@
     <insert id="join_user" parameterType="UserVO">
         INSERT INTO `user` VALUES (#{id}, #{pw}, #{nickname}, #{tel}, #{email}, #{birth}, #{role});
     </insert>
+
 </mapper>

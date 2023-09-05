@@ -14,7 +14,4 @@ public class HomeController {
     public String get_home() {
         return "/home";
     }
-
-
-
 }

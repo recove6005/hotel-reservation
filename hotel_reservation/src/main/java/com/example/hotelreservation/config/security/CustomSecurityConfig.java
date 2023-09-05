@@ -37,7 +37,11 @@ public class CustomSecurityConfig {
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(60 * 60)
                 .and()
-                .authorizeRequests().mvcMatchers(HttpMethod.GET,"/board").hasAnyRole("SELLER")
+                .authorizeRequests()
+                .mvcMatchers(HttpMethod.GET,"/board").hasAnyRole("SELLER")
+                .mvcMatchers("/rooms/reservation").authenticated()
+                .mvcMatchers("/user/mypage/*").authenticated()
+                .mvcMatchers("/user/mypage/sale").hasRole("SELLER")
                 .anyRequest().permitAll();
 
         return http.build();

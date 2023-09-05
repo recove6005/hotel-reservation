@@ -1,18 +1,26 @@
 package com.example.hotelreservation.controller;
 
+import com.example.hotelreservation.domains.dto.ReservationDTO;
+import com.example.hotelreservation.domains.security.SecurityUser;
+import com.example.hotelreservation.domains.vo.ReservationVO;
 import com.example.hotelreservation.domains.vo.UserVO;
+import com.example.hotelreservation.mapper.ReserveMapper;
+import com.example.hotelreservation.service.ReserveService;
 import com.example.hotelreservation.service.SMSService;
 import com.example.hotelreservation.service.UserMailService;
 import com.example.hotelreservation.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -24,6 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserMailService userMailService;
+    @Autowired
+    private ReserveService reserveService;
 
     @GetMapping("/login")
     public void get_login() {
@@ -55,14 +65,23 @@ public class UserController {
         return "redirect:/"; // /home
     }
 
+    @GetMapping("/mypage")
+    public void get_mypage() {
+
+    }
+
     @GetMapping("/mypage/info")
     public void get_mypage_info() {
 
     }
 
     @GetMapping("/mypage/reservation")
-    public void get_mypage_reservation() {
-
+    public void get_mypage_reservation(
+            @AuthenticationPrincipal SecurityUser user,
+            Model model
+    ){
+        List<ReservationDTO> reservationDTOS = reserveService.get_reserve_info_by_user(user.getUserVO());
+        model.addAttribute("ReservationDTOS", reservationDTOS);
     }
 
     @GetMapping("/mypage/sale")

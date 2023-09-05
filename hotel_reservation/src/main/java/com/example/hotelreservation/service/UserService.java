@@ -19,4 +19,9 @@ public class UserService {
         userVO.setPw(passwordEncoder.encode(userVO.getPw()));
         userMapper.join_user(userVO);
     }
+
+    // 현재 로그인된 유저 정보를 가져오는 서비스
+    public void get_user(UserVO vo) {
+
+    }
 }

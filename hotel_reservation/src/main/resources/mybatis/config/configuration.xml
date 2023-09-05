@@ -25,7 +25,7 @@
         <typeAlias alias="RoomImagesVO" type="com.example.hotelreservation.domains.vo.RoomImagesVO"/>
         <typeAlias alias="RoomVO" type="com.example.hotelreservation.domains.vo.RoomVO"/>
         <typeAlias alias="RoomDTO" type="com.example.hotelreservation.domains.dto.RoomDTO"/>
-
-
+        <typeAlias alias="ReservationVO" type="com.example.hotelreservation.domains.vo.ReservationVO"/>
+        <typeAlias alias="ReservationDTO" type="com.example.hotelreservation.domains.dto.ReservationDTO"/>
     </typeAliases>
 </configuration>

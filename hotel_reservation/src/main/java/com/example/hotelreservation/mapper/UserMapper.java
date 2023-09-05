@@ -11,4 +11,7 @@ public interface UserMapper {
     UserVO get_user_by_email(String email);
     // 회원가입
     void join_user(UserVO vo);
+
+    // 마이페이지에서의 유저 정보 조회
+    // void get_user();
 }
